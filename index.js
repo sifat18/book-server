@@ -21,12 +21,13 @@ async function run() {
         // creating collections
         const bookCollection = database.collection('books')
         const newBookCollection = database.collection('upcoming')
-
+// current book data load
         app.get('/books', async (req, res) => {
             const cursor = await bookCollection.find({})
             const books = await cursor.toArray();
             res.json(books)
         })
+//         upcoming book data
         app.get('/newBooks', async (req, res) => {
             const cursor = await newBookCollection.find({})
             const newBook = await cursor.toArray();
