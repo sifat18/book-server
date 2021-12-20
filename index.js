@@ -20,11 +20,17 @@ async function run() {
         const database = client.db('booksDB')
         // creating collections
         const bookCollection = database.collection('books')
+        const newBookCollection = database.collection('upcoming')
 
         app.get('/books', async (req, res) => {
             const cursor = await bookCollection.find({})
-            const sites = await cursor.toArray();
-            res.json(sites)
+            const books = await cursor.toArray();
+            res.json(books)
+        })
+        app.get('/newBooks', async (req, res) => {
+            const cursor = await newBookCollection.find({})
+            const newBook = await cursor.toArray();
+            res.json(newBook)
         })
     } finally {
         // client.close();
